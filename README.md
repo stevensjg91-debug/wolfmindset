@@ -1,2 +1,850 @@
 # wolfmindset
 mentoria en criptoactivos desde 0
+[index (1).html](https://github.com/user-attachments/files/26347564/index.1.html)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[build]
+  publish = "."
+
+# Desactiva la ofuscación de emails de Netlify
+# (evita que reescriba los mailto: y rompa el JavaScript)
+[build.processing]
+  skip_processing = true
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WolfMindset — WolfStrategy</title>
+<meta name="description" content="Learn to generate 40%-60% annually farming on decentralized DEXes. The WolfStrategy system.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--btc:#F7931A;--btc-g:rgba(247,147,26,.22);--gold:#E8C96D;--blk:#060606;--d1:#0d0d0d;--d2:#141414;--d3:#1c1c1c;--w:#F2F0EB;--mu:#666;--mu2:#999;--br:rgba(247,147,26,.14);--br2:rgba(242,240,235,.07);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--blk);color:var(--w);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
+.cur{width:10px;height:10px;background:var(--btc);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.cur-r{width:32px;height:32px;border:1.5px solid rgba(247,147,26,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ===== LANGUAGE SYSTEM ===== */
+/* NOTE: visibility controlled exclusively by JavaScript — no CSS hide here */
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:linear-gradient(to bottom,rgba(6,6,6,.96) 60%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid rgba(247,147,26,.05);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:var(--btc);text-decoration:none;}
+.logo span{color:var(--w);}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--mu2);text-decoration:none;transition:color .2s;cursor:none;}
+.nav-links a:hover{color:var(--btc);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-btn{background:var(--btc);color:var(--blk);font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border:none;cursor:none;text-decoration:none;transition:all .2s;}
+.nav-btn:hover{background:var(--gold);transform:translateY(-1px);}
+.lang-sw{display:flex;border:1px solid var(--br);overflow:hidden;}
+.lang-sw button{background:none;border:none;padding:7px 13px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--mu);cursor:none;transition:all .2s;}
+.lang-sw button:hover{color:var(--btc);}
+.lang-sw button.active{background:var(--btc);color:var(--blk);}
+
+/* TICKER */
+.ticker{background:var(--btc);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2;}
+.t-i{display:inline-flex;gap:48px;animation:tick 28s linear infinite;}
+.t-s{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--blk);letter-spacing:2.5px;text-transform:uppercase;flex-shrink:0;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 90% 70% at 65% 38%,rgba(247,147,26,.055) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 5% 90%,rgba(232,201,109,.03) 0%,transparent 55%);}
+.hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(247,147,26,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(247,147,26,.028) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 65% 38%,black 0%,transparent 62%);}
+.h-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--btc);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;position:relative;z-index:2;opacity:0;animation:fu .7s .3s forwards;}
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,11vw,176px);line-height:.88;letter-spacing:1px;position:relative;z-index:2;opacity:0;animation:fu .7s .5s forwards;}
+.h1 .l1{color:var(--w);display:block;} .h1 .l2{color:var(--btc);display:block;} .h1 .l3{-webkit-text-stroke:1.5px rgba(247,147,26,.28);color:transparent;display:block;}
+.h-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:44px;position:relative;z-index:2;opacity:0;animation:fu .7s .7s forwards;}
+.h-desc{font-size:18px;color:rgba(242,240,235,.52);max-width:460px;line-height:1.78;} .h-desc strong{color:var(--w);}
+.h-acts{display:flex;gap:14px;flex-shrink:0;}
+.bp{background:var(--btc);color:var(--blk);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:16px 36px;border:none;cursor:none;text-decoration:none;display:inline-block;transition:all .25s;position:relative;overflow:hidden;}
+.bp span{position:relative;z-index:1;}
+.bp::after{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform .3s;}
+.bp:hover::after{transform:translateX(0);} .bp:hover{transform:translateY(-2px);box-shadow:0 10px 40px var(--btc-g);}
+.bo{background:transparent;color:var(--w);font-family:'Syne',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border:1px solid var(--br2);cursor:none;text-decoration:none;display:inline-block;transition:all .25s;}
+.bo:hover{border-color:var(--btc);color:var(--btc);}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--br);border-bottom:1px solid var(--br);background:var(--d2);position:relative;z-index:2;}
+.stat{padding:30px 20px;text-align:center;border-right:1px solid var(--br);} .stat:last-child{border-right:none;}
+.sv{font-family:'Bebas Neue',sans-serif;font-size:50px;color:var(--btc);line-height:1;}
+.sl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mu);letter-spacing:2px;text-transform:uppercase;margin-top:8px;}
+
+/* COMMON */
+.sec-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--btc);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,92px);line-height:.92;margin-bottom:24px;} .sec-h em{color:var(--btc);font-style:normal;}
+.rev{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;} .rev.vis{opacity:1;transform:translateY(0);}
+
+/* RENDIMIENTO */
+.rend{padding:100px 60px;max-width:1400px;margin:0 auto;}
+.rend-in{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.rend-txt p{font-size:17px;color:rgba(242,240,235,.58);line-height:1.8;margin-bottom:16px;} .rend-txt strong{color:var(--w);}
+.rend-boxes{display:flex;flex-direction:column;gap:12px;}
+.rb{background:var(--d2);border:1px solid var(--br);padding:22px 26px;display:flex;align-items:center;gap:22px;transition:border-color .3s,background .3s;cursor:none;}
+.rb:hover{border-color:var(--btc);background:rgba(247,147,26,.04);}
+.rb-pct{font-family:'Bebas Neue',sans-serif;font-size:50px;color:var(--btc);line-height:1;min-width:115px;}
+.rb-info strong{font-size:15px;font-weight:700;color:var(--w);display:block;margin-bottom:4px;}
+.rb-info span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu2);}
+.rb.highlight{border-color:rgba(247,147,26,.45);background:rgba(247,147,26,.05);} .rb.highlight .rb-pct{font-size:38px;}
+.disc{margin-top:18px;padding:14px 18px;border-left:3px solid rgba(247,147,26,.25);background:rgba(247,147,26,.03);}
+.disc p{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);letter-spacing:.4px;line-height:1.65;}
+
+/* CICLO */
+.ciclo{padding:80px 60px;background:var(--d1);}
+.ciclo-in{max-width:1400px;margin:0 auto;}
+.ciclo-hdr{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px;}
+.ciclo-hdr p{font-size:17px;color:rgba(242,240,235,.52);line-height:1.8;align-self:end;}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--br);background:var(--br);}
+.fs{background:var(--d2);padding:36px 22px;position:relative;transition:background .3s;cursor:none;} .fs:hover{background:var(--d3);}
+.fn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--btc);letter-spacing:2px;margin-bottom:14px;}
+.fi2{font-size:28px;margin-bottom:14px;} .ft{font-size:14px;font-weight:700;margin-bottom:10px;line-height:1.3;} .fd2{font-size:11px;color:var(--mu2);line-height:1.65;}
+.fa2{position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:22px;height:22px;background:var(--btc);clip-path:polygon(0 0,100% 50%,0 100%);z-index:3;} .fs:last-child .fa2{display:none;}
+
+/* HERRAMIENTAS */
+.herr{padding:100px 60px;} .herr-in{max-width:1400px;margin:0 auto;}
+.herr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br);margin-top:56px;}
+.hc{background:var(--d2);padding:38px 30px;transition:background .3s;cursor:none;position:relative;overflow:hidden;}
+.hc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+.hc:hover{background:var(--d3);} .hc:hover::before{transform:scaleX(1);}
+.hc.ca::before{background:var(--btc);} .hc.cb::before{background:var(--gold);} .hc.cc::before{background:#60a5fa;}
+.hcat{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;}
+.ca .hcat{color:var(--btc);} .cb .hcat{color:var(--gold);} .cc .hcat{color:#60a5fa;}
+.hnum{font-family:'Bebas Neue',sans-serif;font-size:60px;line-height:1;margin-bottom:6px;}
+.ca .hnum{color:rgba(247,147,26,.1);} .cb .hnum{color:rgba(232,201,109,.1);} .cc .hnum{color:rgba(96,165,250,.1);}
+.hname{font-size:18px;font-weight:700;margin-bottom:8px;} .hurl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);margin-bottom:14px;}
+.hdesc{font-size:13px;color:rgba(242,240,235,.52);line-height:1.72;}
+.htags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;} .ht{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 10px;border:1px solid var(--br);color:var(--mu2);}
+
+/* MÓDULOS */
+.mods{padding:100px 60px;background:var(--d1);} .mods-in{max-width:1400px;margin:0 auto;}
+.mods-hdr{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px;}
+.mods-hdr p{font-size:17px;color:rgba(242,240,235,.52);line-height:1.8;align-self:end;}
+.fases{display:flex;flex-direction:column;gap:2px;}
+.fase{background:var(--d2);border:1px solid var(--br);overflow:hidden;}
+.fase-hdr{padding:20px 26px;display:flex;align-items:center;justify-content:space-between;cursor:none;transition:background .2s;gap:16px;} .fase-hdr:hover{background:var(--d3);}
+.fase-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;flex-shrink:0;}
+.f1 .fase-tag{color:var(--btc);} .f2 .fase-tag{color:#60a5fa;} .f3 .fase-tag{color:var(--gold);} .fp .fase-tag{color:#a78bfa;}
+.fase-name{font-size:15px;font-weight:700;flex:1;} .fase-cnt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);flex-shrink:0;}
+.fase-arr{color:var(--btc);font-size:20px;transition:transform .3s;flex-shrink:0;} .fase.open .fase-arr{transform:rotate(45deg);}
+.fase-mods{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(247,147,26,.07);max-height:0;overflow:hidden;transition:max-height .5s ease;} .fase.open .fase-mods{max-height:700px;}
+.mc{background:var(--d2);padding:22px 18px;} .mn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--btc);margin-bottom:8px;}
+.mname{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px;} .mdesc{font-size:11px;color:var(--mu);line-height:1.6;}
+
+/* TOP 5 */
+.top5{padding:100px 60px;} .top5-in{max-width:1400px;margin:0 auto;}
+.coins{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--br);border:1px solid var(--br);margin-top:56px;}
+.coin{background:var(--d2);padding:32px 22px;transition:background .3s;cursor:none;} .coin:hover{background:var(--d3);}
+.csym{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--btc);line-height:1;margin-bottom:6px;}
+.cnm{font-size:11px;color:var(--mu);margin-bottom:14px;font-family:'JetBrains Mono',monospace;}
+.crol{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;display:inline-block;margin-bottom:12px;}
+.cbtc .crol{background:rgba(247,147,26,.12);color:var(--btc);} .ceth .crol{background:rgba(96,165,250,.1);color:#60a5fa;}
+.cbnb .crol{background:rgba(232,201,109,.1);color:var(--gold);} .chype .crol{background:rgba(167,139,250,.1);color:#a78bfa;}
+.csol .crol{background:rgba(74,222,128,.1);color:#4ade80;} .cfund{font-size:12px;color:rgba(242,240,235,.48);line-height:1.65;}
+
+/* SOBRE */
+.sobre{padding:100px 60px;background:var(--d1);} .sobre-in{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.s-txt p{font-size:17px;color:rgba(242,240,235,.58);line-height:1.8;margin-bottom:16px;} .s-txt strong{color:var(--w);} .s-txt .hi{color:var(--btc);}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:34px;}
+.kpi{border-left:3px solid var(--btc);padding-left:18px;} .kv{font-family:'Bebas Neue',sans-serif;font-size:46px;color:var(--btc);line-height:1;}
+.kl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);margin-top:4px;}
+.qbox{background:var(--d2);border:1px solid var(--br);padding:48px 44px;position:relative;overflow:hidden;}
+.qbox::before{content:'"';font-family:'Bebas Neue',sans-serif;font-size:220px;color:rgba(247,147,26,.05);position:absolute;top:-30px;left:16px;line-height:1;pointer-events:none;}
+.qt{font-size:22px;font-weight:600;line-height:1.65;color:var(--w);position:relative;z-index:1;margin-bottom:22px;} .qt em{color:var(--btc);font-style:normal;}
+.qs{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--btc);letter-spacing:2px;}
+
+/* PRECIO */
+.prec{padding:100px 60px;position:relative;overflow:hidden;}
+.prec::before{content:'WOLF';font-family:'Bebas Neue',sans-serif;font-size:38vw;color:rgba(247,147,26,.022);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;line-height:1;}
+.prec-in{max-width:880px;margin:0 auto;position:relative;z-index:2;} .prec-hdr{text-align:center;margin-bottom:56px;}
+.prec-hdr p{font-size:17px;color:rgba(242,240,235,.48);margin-top:14px;line-height:1.7;}
+.planes{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.plan{border:1px solid var(--br);padding:46px 38px;}
+.plan.star{border-color:var(--btc);background:rgba(247,147,26,.04);position:relative;}
+.plan.star::before{content:attr(data-badge);position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--btc);color:var(--blk);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;padding:4px 16px;}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--btc);margin-bottom:14px;}
+.pname{font-size:26px;font-weight:800;margin-bottom:22px;}
+.pfeats{list-style:none;margin-bottom:38px;} .pfeats li{font-size:14px;color:rgba(242,240,235,.72);padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:12px;align-items:flex-start;line-height:1.4;}
+.pfeats li::before{content:'→';color:var(--btc);flex-shrink:0;margin-top:1px;}
+.pbtn{display:block;width:100%;padding:16px;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;cursor:none;border:none;transition:all .25s;text-decoration:none;}
+.pbtn-m{background:var(--btc);color:var(--blk);} .pbtn-m:hover{background:var(--gold);transform:translateY(-2px);}
+.pbtn-o{background:transparent;color:var(--w);border:1px solid var(--br2);} .pbtn-o:hover{border-color:var(--btc);color:var(--btc);}
+
+/* FAQ */
+.faq{padding:100px 60px;max-width:880px;margin:0 auto;} .faq-h{text-align:center;margin-bottom:56px;}
+.fi{border-bottom:1px solid var(--br);padding:24px 0;}
+.fq{font-size:16px;font-weight:600;cursor:none;display:flex;justify-content:space-between;align-items:center;user-select:none;gap:16px;}
+.fq::after{content:'+';font-size:22px;color:var(--btc);transition:transform .3s;flex-shrink:0;} .fi.open .fq::after{transform:rotate(45deg);}
+.fa{font-size:14px;color:rgba(242,240,235,.58);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding-top .3s;} .fi.open .fa{max-height:300px;padding-top:14px;}
+
+/* CTA */
+.cta{padding:120px 60px;text-align:center;background:var(--d1);}
+.cta-in{position:relative;z-index:2;} .cta p{font-size:18px;color:rgba(242,240,235,.48);max-width:460px;margin:18px auto 44px;line-height:1.7;}
+
+/* FOOTER */
+footer{padding:34px 60px;border-top:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--blk);}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--btc);} .flogo span{color:rgba(242,240,235,.28);}
+.fdis{font-size:11px;color:rgba(242,240,235,.18);max-width:460px;text-align:center;line-height:1.6;}
+.fcopy{font-size:11px;color:rgba(242,240,235,.22);font-family:'JetBrains Mono',monospace;}
+
+@keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1024px){
+  nav{padding:16px 24px;} .nav-links{display:none;}
+  .hero,.rend,.ciclo,.herr,.mods,.top5,.sobre,.prec,.faq,.cta,footer{padding-left:24px;padding-right:24px;}
+  .h-row{flex-direction:column;align-items:flex-start;}
+  .stats{grid-template-columns:repeat(3,1fr);}
+  .stat:nth-child(n+4){border-top:1px solid var(--br);}
+  .rend-in,.ciclo-hdr,.mods-hdr,.sobre-in{grid-template-columns:1fr;gap:40px;}
+  .flow{grid-template-columns:1fr 1fr;} .fa2{display:none;}
+  .herr-grid,.planes{grid-template-columns:1fr;}
+  .coins{grid-template-columns:1fr 1fr;}
+  .fase-mods{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .stats{grid-template-columns:1fr 1fr;} .kpis{grid-template-columns:1fr 1fr;}
+  .coins{grid-template-columns:1fr;} .fase-mods{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+<!-- LANGUAGE INIT: runs before paint so no flash of wrong content -->
+<script>
+(function(){
+  var lang = localStorage.getItem('wm-lang') || 'es';
+  // Write a temporary style block to hide the wrong language immediately
+  var style = document.createElement('style');
+  if(lang === 'es'){
+    style.textContent = '.t-en{display:none!important}';
+  } else {
+    style.textContent = '.t-es{display:none!important}';
+  }
+  style.id = 'lang-init';
+  document.head.appendChild(style);
+})();
+</script>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Wolf<span>Mindset</span></a>
+  <div class="nav-links">
+    <a href="#sistema" class="t-es">Sistema</a>
+    <a href="#sistema" class="t-en">System</a>
+    <a href="#herramientas" class="t-es">Herramientas</a>
+    <a href="#herramientas" class="t-en">Tools</a>
+    <a href="#modulos" class="t-es">Módulos</a>
+    <a href="#modulos" class="t-en">Modules</a>
+    <a href="#precio" class="t-es">Planes</a>
+    <a href="#precio" class="t-en">Plans</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button id="btnES" onclick="setLang('es')">ES</button>
+      <button id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#precio" class="nav-btn">
+      <span class="t-es">Unirse →</span>
+      <span class="t-en">Join →</span>
+    </a>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-i">
+    <span class="t-s">🐺 WolfStrategy</span>
+    <span class="t-s t-es">Farming en DEXes</span><span class="t-s t-en">DEX Farming</span>
+    <span class="t-s">40% — 60% <span class="t-es">Anual</span><span class="t-en">Annual</span></span>
+    <span class="t-s">3% — 6% <span class="t-es">Semanal</span><span class="t-en">Weekly</span></span>
+    <span class="t-s">BTC · ETH · BNB · HYPE · SOL</span>
+    <span class="t-s">Uniswap · PancakeSwap · Orca · HyperEVM</span>
+    <span class="t-s">Hyperliquid · Lighter · DeFiLlama · DeBank</span>
+    <span class="t-s">3 <span class="t-es">Meses</span><span class="t-en">Months</span> + Pro</span>
+    <span class="t-s">🐺 WolfStrategy</span>
+    <span class="t-s t-es">Farming en DEXes</span><span class="t-s t-en">DEX Farming</span>
+    <span class="t-s">40% — 60% <span class="t-es">Anual</span><span class="t-en">Annual</span></span>
+    <span class="t-s">3% — 6% <span class="t-es">Semanal</span><span class="t-en">Weekly</span></span>
+    <span class="t-s">BTC · ETH · BNB · HYPE · SOL</span>
+    <span class="t-s">Uniswap · PancakeSwap · Orca · HyperEVM</span>
+    <span class="t-s">Hyperliquid · Lighter · DeFiLlama · DeBank</span>
+    <span class="t-s">3 <span class="t-es">Meses</span><span class="t-en">Months</span> + Pro</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="h-tag">🐺 WolfMindset — WolfStrategy Ebook</div>
+  <h1 class="h1">
+    <span class="l1 t-es">Genera</span><span class="l1 t-en">Generate</span>
+    <span class="l2 t-es">Ingresos</span><span class="l2 t-en">Passive</span>
+    <span class="l3 t-es">Pasivos</span><span class="l3 t-en">Income</span>
+  </h1>
+  <div class="h-row">
+    <p class="h-desc t-es">El sistema que uso cada día para hacer que mi dinero trabaje 24/7. <strong>Farming en DEXes, DCA estratégico y trading apalancado</strong> — todo integrado en un solo método. El dinero siempre en tu wallet.</p>
+    <p class="h-desc t-en">The system I use every day to make my money work 24/7. <strong>DEX farming, strategic DCA and leveraged trading</strong> — all in one method. Your money always stays in your own wallet.</p>
+    <div class="h-acts">
+      <a href="#precio" class="bp"><span class="t-es">Quiero el sistema →</span><span class="t-en">I want the system →</span></a>
+      <a href="#sistema" class="bo"><span class="t-es">Ver cómo funciona</span><span class="t-en">See how it works</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="sv">6+</div><div class="sl t-es">Años en el mercado</div><div class="sl t-en">Years in the market</div></div>
+  <div class="stat"><div class="sv">19</div><div class="sl t-es">Módulos del Ebook</div><div class="sl t-en">Ebook modules</div></div>
+  <div class="stat"><div class="sv">4</div><div class="sl t-es">DEXes principales</div><div class="sl t-en">Main DEXes</div></div>
+  <div class="stat"><div class="sv">3</div><div class="sl t-es">Meses de mentoría</div><div class="sl t-en">Months mentorship</div></div>
+  <div class="stat"><div class="sv">24/7</div><div class="sl t-es">Tu dinero trabajando</div><div class="sl t-en">Your money working</div></div>
+</div>
+
+<!-- RENDIMIENTO -->
+<div class="rend" id="sistema">
+  <div class="rend-in rev">
+    <div class="rend-txt">
+      <div class="sec-tag t-es">// Rendimiento objetivo</div>
+      <div class="sec-tag t-en">// Target returns</div>
+      <h2 class="sec-h t-es">¿Cuánto<br>puedes <em>generar?</em></h2>
+      <h2 class="sec-h t-en">How much<br>can you <em>earn?</em></h2>
+      <p class="t-es">El WolfStrategy genera comisiones <strong>cada día</strong>. El dinero es <strong>retirable desde el primer minuto</strong> — siempre en tu propia wallet, nunca en manos de nadie más. Yo nunca toco tu dinero.</p>
+      <p class="t-en">WolfStrategy generates fees <strong>every day</strong>. Your money is <strong>withdrawable from minute one</strong> — always in your own wallet, never in anyone else's hands. I never touch your money.</p>
+      <p class="t-es">Los rendimientos van desde un <strong>10% anual</strong> para perfiles muy conservadores hasta un <strong>40-60% anual</strong> para un riesgo moderado — que es el perfil con el que yo siempre trabajo. El rango depende de tu tolerancia al riesgo.</p>
+      <p class="t-en">Returns range from <strong>10% annually</strong> for very conservative profiles up to <strong>40-60% annually</strong> for a moderate risk profile — which is the profile I always work with. The range depends on your risk tolerance.</p>
+      <div class="disc">
+        <p class="t-es">⚠️ Todo rendimiento pasado no garantiza resultados futuros. Las criptomonedas son activos de alto riesgo. Invierte solo lo que estés dispuesto a perder. Contenido exclusivamente educativo.</p>
+        <p class="t-en">⚠️ Past performance does not guarantee future results. Cryptocurrencies are high-risk assets. Only invest what you are willing to lose. Strictly educational content.</p>
+      </div>
+    </div>
+    <div class="rend-boxes">
+      <div class="rb">
+        <div class="rb-pct">~10%</div>
+        <div class="rb-info">
+          <strong class="t-es">Anual conservador</strong><strong class="t-en">Conservative annual</strong>
+          <span class="t-es">Riesgo mínimo · Pares estables · Ideal para empezar con seguridad</span>
+          <span class="t-en">Minimum risk · Stable pairs · Perfect for cautious beginners</span>
+        </div>
+      </div>
+      <div class="rb">
+        <div class="rb-pct">~3-4%</div>
+        <div class="rb-info">
+          <strong class="t-es">Semanal moderado</strong><strong class="t-en">Moderate weekly</strong>
+          <span class="t-es">Multi-pool · Gestión activa · El perfil que yo uso</span>
+          <span class="t-en">Multi-pool · Active management · The profile I use</span>
+        </div>
+      </div>
+      <div class="rb">
+        <div class="rb-pct">~5-6%</div>
+        <div class="rb-info">
+          <strong class="t-es">Semanal avanzado</strong><strong class="t-en">Advanced weekly</strong>
+          <span class="t-es">Liquidez concentrada · Longs/Shorts · Optimización Pro</span>
+          <span class="t-en">Concentrated liquidity · Longs/Shorts · Pro optimisation</span>
+        </div>
+      </div>
+      <div class="rb highlight">
+        <div class="rb-pct">40-60%</div>
+        <div class="rb-info">
+          <strong class="t-es">Anual — riesgo moderado · Mi perfil habitual</strong><strong class="t-en">Annual — moderate risk · My usual profile</strong>
+          <span class="t-es">Comisiones diarias · Dinero siempre en tu wallet · Retirable desde el minuto 1</span>
+          <span class="t-en">Daily fees · Money always in your wallet · Withdrawable from minute 1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CICLO -->
+<section class="ciclo">
+  <div class="ciclo-in">
+    <div class="ciclo-hdr rev">
+      <div>
+        <div class="sec-tag t-es">// El ciclo del sistema</div>
+        <div class="sec-tag t-en">// The system cycle</div>
+        <h2 class="sec-h t-es">Así funciona<br>cada <em>semana</em></h2>
+        <h2 class="sec-h t-en">How it works<br>every <em>week</em></h2>
+      </div>
+      <p class="t-es">Un ciclo de menos de 30 minutos semanales. Fees reclamadas, convertidas a estable y acumuladas hasta fin de mes — donde el capital se reinvierte y la reserva actúa según el mercado.</p>
+      <p class="t-en">A cycle under 30 minutes per week. Fees claimed, converted to stablecoin and accumulated until month-end — where capital is reinvested and the reserve acts based on market conditions.</p>
+    </div>
+    <div class="flow rev">
+      <div class="fs">
+        <div class="fn">// 01</div><div class="fi2">⚡</div>
+        <div class="ft t-es">Genera fees en los pools</div><div class="ft t-en">Generate pool fees</div>
+        <div class="fd2 t-es">Tus pools v3 trabajan 24/7 cobrando comisiones de cada swap realizado</div>
+        <div class="fd2 t-en">Your v3 pools work 24/7 earning fees from every swap executed</div>
+        <div class="fa2"></div>
+      </div>
+      <div class="fs">
+        <div class="fn">// 02</div><div class="fi2">📥</div>
+        <div class="ft t-es">Reclama cada semana</div><div class="ft t-en">Claim every week</div>
+        <div class="fd2 t-es">Viernes o domingo: reclamas todas las fees de todos tus pools</div>
+        <div class="fd2 t-en">Friday or Sunday: claim all fees from all your pools</div>
+        <div class="fa2"></div>
+      </div>
+      <div class="fs">
+        <div class="fn">// 03</div><div class="fi2">🛡️</div>
+        <div class="ft t-es">Todo a USDC/USDT</div><div class="ft t-en">Convert to USDC/USDT</div>
+        <div class="fd2 t-es">Conviertes las fees a stablecoin inmediatamente. Ganancias protegidas</div>
+        <div class="fd2 t-en">Immediately convert fees to stablecoin. Earnings protected</div>
+        <div class="fa2"></div>
+      </div>
+      <div class="fs">
+        <div class="fn">// 04</div><div class="fi2">📅</div>
+        <div class="ft t-es">Ciclo mensual</div><div class="ft t-en">Monthly cycle</div>
+        <div class="fd2 t-es">Fees del mes + tu aportación propia. Divides en dos partes iguales</div>
+        <div class="fd2 t-en">Month fees + your own contribution. Split into two equal parts</div>
+        <div class="fa2"></div>
+      </div>
+      <div class="fs">
+        <div class="fn">// 05</div><div class="fi2">🐺</div>
+        <div class="ft t-es">Reinviertes + actúas</div><div class="ft t-en">Reinvest + act</div>
+        <div class="fd2 t-es">Mitad al farming. Mitad a reserva: DCA en bajadas o Longs/Shorts en alcistas</div>
+        <div class="fd2 t-en">Half to farming. Half to reserve: DCA on dips or Longs/Shorts in bull markets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERRAMIENTAS -->
+<section class="herr" id="herramientas">
+  <div class="herr-in">
+    <div class="rev">
+      <div class="sec-tag t-es">// Stack completo de herramientas</div>
+      <div class="sec-tag t-en">// Complete tool stack</div>
+      <h2 class="sec-h t-es">Las herramientas<br>del <em>lobo</em></h2>
+      <h2 class="sec-h t-en">The wolf's<br><em>tools</em></h2>
+    </div>
+    <div class="herr-grid rev">
+      <div class="hc ca">
+        <div class="hcat t-es">📊 Datos de mercado</div><div class="hcat t-en">📊 Market data</div>
+        <div class="hnum">01</div><div class="hname">DeFiLlama</div><div class="hurl">defillama.com</div>
+        <div class="hdesc t-es">El Bloomberg del DeFi. Indexa miles de protocolos en tiempo real. Úsalo para encontrar los mejores APRs, comparar TVL entre redes, revisar el historial de hackeos antes de entrar en cualquier protocolo y vigilar que USDC y USDT mantienen su peg de 1 dólar.</div>
+        <div class="hdesc t-en">The Bloomberg of DeFi. Indexes thousands of protocols in real time. Use it to find the best APRs, compare TVL across chains, check hack history before entering any protocol, and monitor that USDC and USDT hold their $1 peg.</div>
+        <div class="htags"><span class="ht">APRs</span><span class="ht">TVL</span><span class="ht">Hacks</span><span class="ht">Stablecoins</span></div>
+      </div>
+      <div class="hc ca">
+        <div class="hcat t-es">💼 Control de portafolio</div><div class="hcat t-en">💼 Portfolio control</div>
+        <div class="hnum">02</div><div class="hname">DeBank</div><div class="hurl">debank.com</div>
+        <div class="hdesc t-es">Tu panel de control personal multi-chain. Introduce tu dirección pública de wallet y ve todo tu capital en todas las redes en una sola pantalla. Posiciones activas, fees acumuladas e historial completo de transacciones.</div>
+        <div class="hdesc t-en">Your personal multi-chain dashboard. Enter your public wallet address and see all your capital across every network on one screen. Active positions, accumulated fees and full transaction history.</div>
+        <div class="htags"><span class="ht">Multi-chain</span><span class="ht">Portfolio</span><span class="ht">Farming</span><span class="ht">IL</span></div>
+      </div>
+      <div class="hc ca">
+        <div class="hcat t-es">🔒 DEXes favoritos</div><div class="hcat t-en">🔒 Favourite DEXes</div>
+        <div class="hnum">03</div>
+        <div class="hname t-es">Exclusivo para alumnos</div><div class="hname t-en">Students only</div>
+        <div class="hdesc t-es">Los DEXes donde invierto personalmente y donde aplico el WolfStrategy son información exclusiva de la mentoría. No los comparto públicamente porque son mi ventaja competitiva. Los descubrirás dentro del Ebook.</div>
+        <div class="hdesc t-en">The DEXes where I personally invest and apply WolfStrategy are exclusive mentorship information. I don't share them publicly because they are my competitive edge. You'll discover them inside the Ebook.</div>
+        <div class="htags"><span class="ht t-es">Solo en la mentoría</span><span class="ht t-en">Inside mentorship only</span></div>
+      </div>
+      <div class="hc cb">
+        <div class="hcat t-es">🔮 Oráculos de precio</div><div class="hcat t-en">🔮 Price oracles</div>
+        <div class="hnum">04</div><div class="hname">Chainlink + Pyth</div><div class="hurl">chain.link · pyth.network</div>
+        <div class="hdesc t-es">Sin oráculos no existe el DeFi. Chainlink es el estándar en Ethereum y BNB Chain. Pyth es el equivalente ultra-rápido para Solana y HyperEVM, actualizando cada 400ms con datos de instituciones financieras profesionales.</div>
+        <div class="hdesc t-en">Without oracles there is no DeFi. Chainlink is the standard on Ethereum and BNB Chain. Pyth is the ultra-fast equivalent for Solana and HyperEVM, updating every 400ms with data from professional financial institutions.</div>
+        <div class="htags"><span class="ht">Ethereum</span><span class="ht">Solana</span><span class="ht">BNB Chain</span><span class="ht">HyperEVM</span></div>
+      </div>
+      <div class="hc cb">
+        <div class="hcat t-es">🌉 Bridges entre redes</div><div class="hcat t-en">🌉 Cross-chain bridges</div>
+        <div class="hnum">05</div><div class="hname">Stargate + Wormhole</div><div class="hurl">stargate.finance · wormhole.com</div>
+        <div class="hdesc t-es">Para operar donde están las mejores oportunidades necesitas mover capital entre redes de forma segura. Herramientas esenciales para cualquier estrategia multi-chain — detalladas dentro de la mentoría.</div>
+        <div class="hdesc t-en">To operate where the best opportunities are, you need to move capital between chains safely. Essential tools for any multi-chain strategy — covered in detail inside the mentorship.</div>
+        <div class="htags"><span class="ht">USDC</span><span class="ht">Multi-chain</span><span class="ht">Solana</span><span class="ht">HyperEVM</span></div>
+      </div>
+      <div class="hc cc">
+        <div class="hcat t-es">⚡ PerpDEX — Avanzado</div><div class="hcat t-en">⚡ PerpDEX — Advanced</div>
+        <div class="hnum">06</div><div class="hname">Hyperliquid + Lighter</div><div class="hurl">app.hyperliquid.xyz · lighter.xyz</div>
+        <div class="hdesc t-es">Los PerpDEX más avanzados del mercado para longs y shorts apalancados. Hyperliquid procesa 100.000 TPS con order book on-chain y sin KYC — mínimo 3x de apalancamiento. Lighter su equivalente en Arbitrum.</div>
+        <div class="hdesc t-en">The most advanced PerpDEXes for leveraged longs and shorts. Hyperliquid processes 100,000 TPS with on-chain order book and no KYC — minimum 3x leverage. Lighter is its Arbitrum equivalent.</div>
+        <div class="htags"><span class="ht">Perpetuals</span><span class="ht">Long/Short</span><span class="ht">3x min</span><span class="ht">HYPE</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="mods" id="modulos">
+  <div class="mods-in">
+    <div class="mods-hdr rev">
+      <div>
+        <div class="sec-tag t-es">// Contenido completo</div>
+        <div class="sec-tag t-en">// Full content</div>
+        <h2 class="sec-h t-es">19 módulos.<br><em>Un sistema.</em></h2>
+        <h2 class="sec-h t-en">19 modules.<br><em>One system.</em></h2>
+      </div>
+      <p class="t-es">3 meses de formación estructurada desde cero hasta estrategias avanzadas de trading apalancado. Más clases Pro de optimización. Todo en tu Ebook de Notion.</p>
+      <p class="t-en">3 months of structured training from zero to advanced leveraged trading strategies. Plus Pro optimisation classes. All in your Notion Ebook.</p>
+    </div>
+    <div class="fases rev">
+      <div class="fase f1">
+        <div class="fase-hdr" onclick="tF(this)">
+          <span class="fase-tag t-es">Fase 1 — Mes 1</span><span class="fase-tag t-en">Phase 1 — Month 1</span>
+          <span class="fase-name t-es">Fundamentos del mundo cripto</span><span class="fase-name t-en">Crypto world fundamentals</span>
+          <span class="fase-cnt">5 mods</span>
+          <span class="fase-arr">+</span>
+        </div>
+        <div class="fase-mods">
+          <div class="mc"><div class="mn">MOD 01</div><div class="mname t-es">¿Qué es el dinero digital?</div><div class="mname t-en">What is digital money?</div><div class="mdesc t-es">Bitcoin, escasez, por qué existe. De cero absoluto.</div><div class="mdesc t-en">Bitcoin, scarcity, why it exists. Starting from scratch.</div></div>
+          <div class="mc"><div class="mn">MOD 02</div><div class="mname t-es">Blockchain sin tecnicismos</div><div class="mname t-en">Blockchain without jargon</div><div class="mdesc t-es">Analogía del LEGO. Mineros, bloques y cadena inmutable.</div><div class="mdesc t-en">LEGO analogy. Miners, blocks and immutable chain.</div></div>
+          <div class="mc"><div class="mn">MOD 02B</div><div class="mname">Oracles: Chainlink &amp; Pyth</div><div class="mdesc t-es">El puente entre blockchain y el mundo real.</div><div class="mdesc t-en">The bridge between blockchain and the real world.</div></div>
+          <div class="mc"><div class="mn">MOD 03</div><div class="mname t-es">Tu primera wallet</div><div class="mname t-en">Your first wallet</div><div class="mdesc t-es">MetaMask, Phantom. Frase semilla. La lección más importante.</div><div class="mdesc t-en">MetaMask, Phantom. Seed phrase. The most important lesson.</div></div>
+          <div class="mc"><div class="mn">MOD 04</div><div class="mname t-es">Stablecoins, exchanges y Top 5</div><div class="mname t-en">Stablecoins, exchanges &amp; Top 5</div><div class="mdesc t-es">USDC y USDT. Fundamentales de BTC, ETH, BNB, HYPE y SOL.</div><div class="mdesc t-en">USDC and USDT. Fundamentals of BTC, ETH, BNB, HYPE and SOL.</div></div>
+        </div>
+      </div>
+      <div class="fase f2">
+        <div class="fase-hdr" onclick="tF(this)">
+          <span class="fase-tag t-es">Fase 2 — Mes 2</span><span class="fase-tag t-en">Phase 2 — Month 2</span>
+          <span class="fase-name t-es">DeFi, DEXes y herramientas</span><span class="fase-name t-en">DeFi, DEXes &amp; tools</span>
+          <span class="fase-cnt">7 mods</span>
+          <span class="fase-arr">+</span>
+        </div>
+        <div class="fase-mods">
+          <div class="mc"><div class="mn">MOD 05</div><div class="mname t-es">¿Qué es DeFi?</div><div class="mname t-en">What is DeFi?</div><div class="mdesc t-es">El banco sin bancos. Contratos inteligentes y pools.</div><div class="mdesc t-en">Banking without banks. Smart contracts and pools.</div></div>
+          <div class="mc"><div class="mn">MOD 05B</div><div class="mname">Bridges</div><div class="mdesc t-es">Stargate, Wormhole, Hyperliquid Bridge y Across.</div><div class="mdesc t-en">Stargate, Wormhole, Hyperliquid Bridge and Across.</div></div>
+          <div class="mc"><div class="mn">MOD 06</div><div class="mname">DEXes: Uniswap, PancakeSwap, Orca</div><div class="mdesc t-es">Nuestros campos de caza. Cada uno en detalle.</div><div class="mdesc t-en">Our hunting grounds. Each one in detail.</div></div>
+          <div class="mc"><div class="mn">MOD 06B</div><div class="mname">DeFiLlama &amp; DeBank</div><div class="mdesc t-es">Tus herramientas de control. Cómo usarlas cada semana.</div><div class="mdesc t-en">Your control tools. How to use them every week.</div></div>
+          <div class="mc"><div class="mn">MOD 07</div><div class="mname t-es">Farming de liquidez 24/7</div><div class="mname t-en">Liquidity farming 24/7</div><div class="mdesc t-es">Pares favoritos, APRs reales, proceso paso a paso.</div><div class="mdesc t-en">Favourite pairs, real APRs, step-by-step process.</div></div>
+          <div class="mc"><div class="mn">MOD 08</div><div class="mname t-es">Gestión de riesgo: IL y más</div><div class="mname t-en">Risk management: IL &amp; more</div><div class="mdesc t-es">Impermanent Loss, smart contract risk, rug pulls.</div><div class="mdesc t-en">Impermanent Loss, smart contract risk, rug pulls.</div></div>
+          <div class="mc"><div class="mn">MOD 08B</div><div class="mname">PerpDEX: Hyperliquid &amp; Lighter</div><div class="mdesc t-es">Contratos perpetuos descentralizados. Long/Short. Order book on-chain.</div><div class="mdesc t-en">Decentralised perpetual contracts. Long/Short. On-chain order book.</div></div>
+        </div>
+      </div>
+      <div class="fase f3">
+        <div class="fase-hdr" onclick="tF(this)">
+          <span class="fase-tag t-es">Fase 3 — Mes 3</span><span class="fase-tag t-en">Phase 3 — Month 3</span>
+          <span class="fase-name t-es">WolfStrategy: el sistema completo</span><span class="fase-name t-en">WolfStrategy: the complete system</span>
+          <span class="fase-cnt">4 mods</span>
+          <span class="fase-arr">+</span>
+        </div>
+        <div class="fase-mods">
+          <div class="mc"><div class="mn">MOD 09</div><div class="mname t-es">Ciclo semanal y mensual</div><div class="mname t-en">Weekly &amp; monthly cycle</div><div class="mdesc t-es">Fees → USDC → reinversión + reserva. El corazón del sistema.</div><div class="mdesc t-en">Fees → USDC → reinvestment + reserve. The heart of the system.</div></div>
+          <div class="mc"><div class="mn">MOD 10</div><div class="mname t-es">DCA de BTC, ETH y HYPE</div><div class="mname t-en">DCA on BTC, ETH &amp; HYPE</div><div class="mdesc t-es">Por qué estos tres. Distribución, horizonte y automatización.</div><div class="mdesc t-en">Why these three. Allocation, time horizon and automation.</div></div>
+          <div class="mc"><div class="mn">MOD 11</div><div class="mname t-es">Farming + DCA: sistema completo</div><div class="mname t-en">Farming + DCA: complete system</div><div class="mdesc t-es">Los dos motores en paralelo. Interés compuesto real.</div><div class="mdesc t-en">Both engines running in parallel. Real compound interest.</div></div>
+          <div class="mc"><div class="mn">MOD 12</div><div class="mname t-es">Pools v3: actuar según el mercado</div><div class="mname t-en">v3 Pools: act on market conditions</div><div class="mdesc t-es">Precio fuera del rango. Doble volátil en alcista vs vol/estable en bajista.</div><div class="mdesc t-en">Price out of range. Double volatile in bull vs vol/stable in bear.</div></div>
+        </div>
+      </div>
+      <div class="fase fp">
+        <div class="fase-hdr" onclick="tF(this)">
+          <span class="fase-tag t-es">Fase Pro — Extra</span><span class="fase-tag t-en">Pro Phase — Extra</span>
+          <span class="fase-name t-es">Optimización avanzada</span><span class="fase-name t-en">Advanced optimisation</span>
+          <span class="fase-cnt">6 PRO</span>
+          <span class="fase-arr">+</span>
+        </div>
+        <div class="fase-mods">
+          <div class="mc"><div class="mn">PRO 01</div><div class="mname t-es">Optimización avanzada de farming</div><div class="mname t-en">Advanced farming optimisation</div><div class="mdesc t-es">Liquidez concentrada. Multi-pool en varias redes.</div><div class="mdesc t-en">Concentrated liquidity. Multi-pool across networks.</div></div>
+          <div class="mc"><div class="mn">PRO 02</div><div class="mname t-es">Multi-chain y portafolio avanzado</div><div class="mname t-en">Multi-chain &amp; advanced portfolio</div><div class="mdesc t-es">Bridges, rebalanceo trimestral y registro fiscal.</div><div class="mdesc t-en">Bridges, quarterly rebalancing and tax records.</div></div>
+          <div class="mc"><div class="mn">PRO 03</div><div class="mname t-es">Herramientas y automatización</div><div class="mname t-en">Tools &amp; automation</div><div class="mdesc t-es">Autocomponedores, alertas y el stack completo.</div><div class="mdesc t-en">Auto-compounders, alerts and the complete stack.</div></div>
+          <div class="mc"><div class="mn">PRO 04</div><div class="mname t-es">Mentalidad del inversor</div><div class="mname t-en">Investor mindset</div><div class="mdesc t-es">FOMO, pánico, overtrading. Las 5 reglas mentales WolfStrategy.</div><div class="mdesc t-en">FOMO, panic, overtrading. The 5 WolfStrategy mental rules.</div></div>
+          <div class="mc"><div class="mn">PRO 05</div><div class="mname t-es">Longs y Shorts apalancados (3x mín.)</div><div class="mname t-en">Leveraged Longs &amp; Shorts (3x min.)</div><div class="mdesc t-es">Reserva estratégica → operar apalancado en Hyperliquid.</div><div class="mdesc t-en">Strategic reserve → leveraged trading on Hyperliquid.</div></div>
+          <div class="mc"><div class="mn">PRO 06</div><div class="mname t-es">Memecoins con short de cobertura</div><div class="mname t-en">Memecoins with short hedge</div><div class="mdesc t-es">Los 3 requisitos: APR≥2% diario, rango≥±30%, TVL≥100k$.</div><div class="mdesc t-en">3 requirements: APR≥2% daily, range≥±30%, TVL≥$100k.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP 5 -->
+<section class="top5">
+  <div class="top5-in">
+    <div class="rev">
+      <div class="sec-tag t-es">// Los activos</div><div class="sec-tag t-en">// The assets</div>
+      <h2 class="sec-h">Top 5<br><em>WolfStrategy</em></h2>
+    </div>
+    <div class="coins rev">
+      <div class="coin cbtc"><div class="csym">BTC</div><div class="cnm">Bitcoin</div>
+        <div class="crol t-es">DCA Largo Plazo</div><div class="crol t-en">Long-term DCA</div>
+        <div class="cfund t-es">21M de límite absoluto. Halving cada 4 años. Reserva institucional creciente. La escasez es su mayor ventaja.</div>
+        <div class="cfund t-en">Absolute 21M cap. Halving every 4 years. Growing institutional reserve. Scarcity is its greatest strength.</div>
+      </div>
+      <div class="coin ceth"><div class="csym">ETH</div><div class="cnm">Ethereum</div>
+        <div class="crol t-es">DCA + Farming</div><div class="crol t-en">DCA + Farming</div>
+        <div class="cfund t-es">Motor del DeFi. Deflacionario post-merge. Base de Uniswap y el 70% del ecosistema DeFi mundial.</div>
+        <div class="cfund t-en">DeFi engine. Deflationary post-merge. Base of Uniswap and 70% of the global DeFi ecosystem.</div>
+      </div>
+      <div class="coin cbnb"><div class="csym">BNB</div><div class="cnm">BNB Chain</div>
+        <div class="crol t-es">Farming PancakeSwap</div><div class="crol t-en">PancakeSwap Farming</div>
+        <div class="cfund t-es">Fees ultra bajas. Ecosistema Binance. Quema periódica. Ideal para empezar con menos capital.</div>
+        <div class="cfund t-en">Ultra-low fees. Binance ecosystem. Periodic burn. Ideal for starting with less capital.</div>
+      </div>
+      <div class="coin chype"><div class="csym">HYPE</div><div class="cnm">Hyperliquid</div>
+        <div class="crol t-es">DCA Corto-Medio</div><div class="crol t-en">Short-mid DCA</div>
+        <div class="cfund t-es">Token del mejor PerpDEX del mercado. Buyback automático. HyperEVM en plena expansión. Alto potencial.</div>
+        <div class="cfund t-en">Token of the best PerpDEX in the market. Automatic buyback. HyperEVM rapidly expanding. High potential.</div>
+      </div>
+      <div class="coin csol"><div class="csym">SOL</div><div class="cnm">Solana</div>
+        <div class="crol t-es">Farming Orca</div><div class="crol t-en">Orca Farming</div>
+        <div class="cfund t-es">Ultra rápida, coste casi cero. Orca Whirlpools para yields competitivos. Ecosistema en máxima expansión.</div>
+        <div class="cfund t-en">Ultra-fast, near-zero cost. Orca Whirlpools for competitive yields. Ecosystem at peak expansion.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section class="sobre">
+  <div class="sobre-in">
+    <div class="rev">
+      <div class="sec-tag t-es">// Sobre el creador</div><div class="sec-tag t-en">// About the creator</div>
+      <h2 class="sec-h t-es">6 años.<br><em>Un método.</em></h2>
+      <h2 class="sec-h t-en">6 years.<br><em>One method.</em></h2>
+      <p class="t-es">No soy un youtuber que habla de cripto desde un hotel. Llevo en el mercado <strong>desde 2020 — más de 6 años</strong> construyendo, fallando y perfeccionando este sistema en el mundo real.</p>
+      <p class="t-en">I'm not a YouTuber talking about crypto from a hotel. I've been in the market <strong>since 2020 — over 6 years</strong> building, failing and perfecting this system in the real world.</p>
+      <p class="t-es">Empecé como todos: comprando, esperando y nervioso con cada caída. <span class="hi">Después descubrí el farming en DEXes.</span> Mi sistema genera comisiones <strong>cada día</strong>. El dinero <strong>siempre está en la wallet del alumno</strong> — yo nunca lo toco.</p>
+      <p class="t-en">I started like everyone: buying, waiting, nervous with every dip. <span class="hi">Then I discovered DEX farming.</span> My system generates fees <strong>every day</strong>. The money <strong>always stays in the student's wallet</strong> — I never touch it.</p>
+      <p class="t-es">No prometo hacerte millonario. <strong>Te enseño a construir un sistema que trabaja por ti, con tu propio dinero, bajo tu propio control.</strong></p>
+      <p class="t-en">I don't promise to make you a millionaire. <strong>I teach you to build a system that works for you, with your own money, under your own control.</strong></p>
+      <div class="kpis">
+        <div class="kpi"><div class="kv">6+</div><div class="kl t-es">Años en el mercado</div><div class="kl t-en">Years in the market</div></div>
+        <div class="kpi"><div class="kv">4</div><div class="kl t-es">DEXes dominados</div><div class="kl t-en">DEXes mastered</div></div>
+        <div class="kpi"><div class="kv">52</div><div class="kl t-es">Semanas de fees/año</div><div class="kl t-en">Fee weeks/year</div></div>
+        <div class="kpi"><div class="kv">0</div><div class="kl t-es">Jefes. Autonomía total.</div><div class="kl t-en">Bosses. Full autonomy.</div></div>
+      </div>
+    </div>
+    <div class="rev">
+      <div class="qbox">
+        <div class="qt t-es">"No seas el que compra cuando todo sube y vende cuando cae. Sé el que <em>acumula en silencio</em> y cobra comisiones mientras los demás duermen."</div>
+        <div class="qt t-en">"Don't be the one who buys when everything rises and sells when it falls. Be the one who <em>accumulates in silence</em> and earns fees while others sleep."</div>
+        <div class="qs">— WolfMindset</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTÍAS -->
+<section style="padding:80px 60px;background:var(--d1);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="rev" style="text-align:center;margin-bottom:48px;">
+      <div class="sec-tag t-es">// Por qué confiar</div>
+      <div class="sec-tag t-en">// Why trust us</div>
+      <h2 class="sec-h t-es">Tu dinero.<br><em>Tus reglas.</em></h2>
+      <h2 class="sec-h t-en">Your money.<br><em>Your rules.</em></h2>
+    </div>
+    <div class="rev" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br);">
+      <div style="background:var(--d2);padding:36px 28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:16px;">🔐</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-es">Siempre en tu wallet</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-en">Always in your wallet</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-es">Tu dinero nunca sale de tu wallet. Yo no tengo acceso a tus fondos en ningún momento. Tú tienes el control total.</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-en">Your money never leaves your wallet. I have no access to your funds at any time. You are in full control.</div>
+      </div>
+      <div style="background:var(--d2);padding:36px 28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:16px;">⚡</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-es">Retirable desde el minuto 1</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-en">Withdrawable from minute 1</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-es">No hay bloqueos ni períodos mínimos. Puedes retirar tu capital en cualquier momento, al instante, sin pedir permiso a nadie.</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-en">No lock-ups or minimum periods. You can withdraw your capital at any time, instantly, without asking anyone for permission.</div>
+      </div>
+      <div style="background:var(--d2);padding:36px 28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:16px;">📅</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-es">Comisiones cada día</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--btc);margin-bottom:12px;" class="t-en">Fees every single day</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-es">El sistema genera comisiones diariamente. No semanalmente, no mensualmente. Cada día que el mercado opera, tu dinero trabaja.</div>
+        <div style="font-size:13px;color:rgba(242,240,235,.55);line-height:1.7;" class="t-en">The system generates fees daily. Not weekly, not monthly. Every day the market operates, your money works.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section class="prec" id="precio">
+  <div class="prec-in">
+    <div class="prec-hdr rev">
+      <div class="sec-tag t-es">// Inversión en tu formación</div>
+      <div class="sec-tag t-en">// Invest in your education</div>
+      <h2 class="sec-h t-es">Elige tu<br><em>camino</em></h2>
+      <h2 class="sec-h t-en">Choose your<br><em>path</em></h2>
+      <p class="t-es">Acceso único. Ebook en Notion tuyo para siempre. Actualizaciones incluidas.</p>
+      <p class="t-en">One-time access. Your Notion Ebook forever. Updates included.</p>
+    </div>
+    <div class="planes rev">
+      <div class="plan">
+        <div class="ptag">// Base</div>
+        <div class="pname">WolfStrategy Base</div>
+        <ul class="pfeats">
+          <li class="t-es">12 módulos completos (3 meses)</li><li class="t-en">12 complete modules (3 months)</li>
+          <li class="t-es">Ebook completo en Notion</li><li class="t-en">Full Notion Ebook</li>
+          <li class="t-es">Sistema ciclo semanal y mensual</li><li class="t-en">Weekly and monthly cycle system</li>
+          <li class="t-es">Estrategia completa de pools v3</li><li class="t-en">Complete v3 pool strategy</li>
+          <li>Oracles, Bridges, DeFiLlama, DeBank</li>
+          <li>PerpDEX: Hyperliquid &amp; Lighter</li>
+          <li class="t-es">Glosario de 60+ términos</li><li class="t-en">60+ term glossary</li>
+          <li class="t-es">Ejercicios prácticos por módulo</li><li class="t-en">Practical exercises per module</li>
+        </ul>
+        <a href="#" onclick="window.location.href='mai'+'lto:wol'+'fmindset@'+'gmail.com';return false;" class="pbtn pbtn-o">
+          <span class="t-es">Empezar con Base</span><span class="t-en">Start with Base</span>
+        </a>
+      </div>
+      <div class="plan star" data-badge="✦ MOST POPULAR" id="planStar">
+        <div class="ptag">// Pro</div>
+        <div class="pname">WolfStrategy Pro</div>
+        <ul class="pfeats">
+          <li class="t-es">Todo lo del plan Base incluido</li><li class="t-en">Everything in Base included</li>
+          <li class="t-es">6 clases Pro avanzadas completas</li><li class="t-en">6 complete advanced Pro classes</li>
+          <li class="t-es">Longs y Shorts apalancados 3x mínimo</li><li class="t-en">Leveraged Longs &amp; Shorts 3x minimum</li>
+          <li class="t-es">Estrategia memecoins con cobertura</li><li class="t-en">Memecoin strategy with short hedge</li>
+          <li class="t-es">Multi-chain y automatización avanzada</li><li class="t-en">Multi-chain and advanced automation</li>
+          <li class="t-es">Optimización de liquidez concentrada v3</li><li class="t-en">v3 concentrated liquidity optimisation</li>
+          <li class="t-es">Psicología y mentalidad del inversor</li><li class="t-en">Investor psychology and mindset</li>
+          <li class="t-es">Acceso a todas las actualizaciones futuras</li><li class="t-en">Access to all future updates</li>
+        </ul>
+        <a href="#" onclick="window.location.href='mai'+'lto:wol'+'fmindset@'+'gmail.com';return false;" class="pbtn pbtn-m">
+          <span class="t-es">Quiero el Pro →</span><span class="t-en">I want Pro →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-h rev">
+    <div class="sec-tag t-es">// Preguntas frecuentes</div>
+    <div class="sec-tag t-en">// FAQ</div>
+    <h2 class="sec-h t-es">Tienes<br><em>dudas</em></h2>
+    <h2 class="sec-h t-en">Got<br><em>questions?</em></h2>
+  </div>
+  <div class="rev">
+    <div class="fi">
+      <div class="fq"><span class="t-es">¿Necesito experiencia previa en cripto?</span><span class="t-en">Do I need prior crypto experience?</span></div>
+      <div class="fa t-es">No. El programa empieza desde cero absoluto. El Módulo 01 explica qué es el dinero digital como si nunca hubieras escuchado hablar de Bitcoin.</div>
+      <div class="fa t-en">No. The program starts from absolute zero. Module 01 explains what digital money is as if you had never heard of Bitcoin before.</div>
+    </div>
+    <div class="fi">
+      <div class="fq"><span class="t-es">¿Cuánto capital necesito para empezar?</span><span class="t-en">How much capital do I need to start?</span></div>
+      <div class="fa t-es">Puedes empezar con 200-300€ en PancakeSwap o Orca, donde las comisiones de red son casi cero. El sistema crece progresivamente.</div>
+      <div class="fa t-en">You can start with 200-300€ on PancakeSwap or Orca, where network fees are near zero. The system grows progressively.</div>
+    </div>
+    <div class="fi">
+      <div class="fq"><span class="t-es">¿El 40-60% anual está garantizado?</span><span class="t-en">Is the 40-60% annual return guaranteed?</span></div>
+      <div class="fa t-es">No. Ningún rendimiento está garantizado en cripto. El 40-60% anual es el rango objetivo basado en condiciones normales de mercado. Las criptomonedas son activos de alto riesgo.</div>
+      <div class="fa t-en">No. No return is guaranteed in crypto. The 40-60% annual figure is the target range based on normal market conditions. Cryptocurrencies are high-risk assets.</div>
+    </div>
+    <div class="fi">
+      <div class="fq"><span class="t-es">¿Cuánto tiempo dedico a la semana?</span><span class="t-en">How much time per week?</span></div>
+      <div class="fa t-es">Menos de 2 horas al mes de gestión activa. Unos 30-35 minutos semanales para revisar posiciones y reclamar fees. El resto lo hace el sistema solo.</div>
+      <div class="fa t-en">Less than 2 hours per month of active management. About 30-35 minutes weekly to review positions and claim fees. The system does the rest.</div>
+    </div>
+    <div class="fi">
+      <div class="fq"><span class="t-es">¿El Ebook es mío para siempre?</span><span class="t-en">Is the Ebook mine forever?</span></div>
+      <div class="fa t-es">Sí. Una vez que te unes, el Ebook en Notion es tuyo para siempre. Lo tendrás como referencia en cualquier momento.</div>
+      <div class="fa t-en">Yes. Once you join, the Notion Ebook is yours forever. You'll have it as a reference at any time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta">
+  <div class="cta-in rev">
+    <div class="sec-tag t-es" style="display:block;margin-bottom:14px">// El momento es ahora</div>
+    <div class="sec-tag t-en" style="display:block;margin-bottom:14px">// The time is now</div>
+    <h2 class="sec-h t-es" style="font-size:clamp(64px,9vw,138px)">El lobo<br><em>no espera.</em></h2>
+    <h2 class="sec-h t-en" style="font-size:clamp(64px,9vw,138px)">The wolf<br><em>doesn't wait.</em></h2>
+    <p class="t-es">Cada semana sin un sistema es una semana de fees que no estás cobrando.</p>
+    <p class="t-en">Every week without a system is a week of fees you're not collecting.</p>
+    <a href="#" onclick="window.location.href='mai'+'lto:wol'+'fmindset@'+'gmail.com';return false;" class="bp" style="font-size:14px;padding:20px 50px;">
+      <span class="t-es">Contacta ahora → wolfmindset&#64;gmail.com</span>
+      <span class="t-en">Contact now → wolfmindset&#64;gmail.com</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Wolf<span>Mindset</span></div>
+  <div class="fdis t-es">⚠️ Contenido exclusivamente educativo. Las criptomonedas son activos de alto riesgo. Los rendimientos son objetivos basados en condiciones normales de mercado, no garantías. Nada aquí es asesoramiento financiero.</div>
+  <div class="fdis t-en">⚠️ Strictly educational content. Cryptocurrencies are high-risk assets. Returns mentioned are targets based on normal market conditions, not guarantees. Nothing here is financial advice.</div>
+  <div class="fcopy">© 2025 WolfMindset</div>
+</footer>
+
+<script>
+/* ===== LANGUAGE SYSTEM ===== */
+function setLang(lang) {
+  // Remove the head init style if still there
+  var initStyle = document.getElementById('lang-init');
+  if(initStyle) initStyle.remove();
+
+  // Show/hide all language elements
+  document.querySelectorAll('.t-es, .t-en').forEach(function(el){
+    el.style.display = '';
+  });
+  document.querySelectorAll(lang === 'es' ? '.t-en' : '.t-es').forEach(function(el){
+    el.style.display = 'none';
+  });
+
+  // Buttons
+  document.getElementById('btnES').classList.toggle('active', lang === 'es');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+
+  // Plan badge
+  var star = document.getElementById('planStar');
+  if(star) star.setAttribute('data-badge', lang === 'es' ? '✦ MÁS POPULAR' : '✦ MOST POPULAR');
+
+  document.documentElement.lang = lang;
+  localStorage.setItem('wm-lang', lang);
+}
+
+// Init on load — use both DOMContentLoaded and immediate call as fallback
+function initLang(){
+  var saved = localStorage.getItem('wm-lang') || 'es';
+  setLang(saved);
+}
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initLang);
+} else {
+  initLang();
+}
+
+/* ===== CURSOR ===== */
+const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function loop() {
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  rx += (mx - rx) * .1; ry += (my - ry) * .1;
+  curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.fase-hdr,.fq,.hc,.coin,.rb,.plan,.fs').forEach(el => {
+  el.addEventListener('mouseenter', () => { curR.style.width = '52px'; curR.style.height = '52px'; curR.style.borderColor = 'rgba(247,147,26,.8)'; });
+  el.addEventListener('mouseleave', () => { curR.style.width = '32px'; curR.style.height = '32px'; curR.style.borderColor = 'rgba(247,147,26,.4)'; });
+});
+
+/* ===== REVEAL ===== */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('vis'), i * 55); });
+}, { threshold: .07 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+/* ===== FASES ACCORDION ===== */
+function tF(hdr) { hdr.parentElement.classList.toggle('open'); }
+
+/* ===== FAQ ACCORDION ===== */
+document.querySelectorAll('.fq').forEach(q => {
+  q.addEventListener('click', () => {
+    const fi = q.parentElement;
+    const wasOpen = fi.classList.contains('open');
+    document.querySelectorAll('.fi').forEach(f => f.classList.remove('open'));
+    if (!wasOpen) fi.classList.add('open');
+  });
+});
+
+/* ===== SMOOTH NAV ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
