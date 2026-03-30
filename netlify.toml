@@ -1,0 +1,14 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[build]
+  publish = "."
+
+# Desactiva la ofuscación de emails de Netlify
+# (evita que reescriba los mailto: y rompa el JavaScript)
+[build.processing]
+  skip_processing = true
